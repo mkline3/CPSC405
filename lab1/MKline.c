@@ -6,11 +6,10 @@ Lab1 CPSC 405
 
 
 struct LL{
-	int x;
+	int data;
 	struct LL *next;
 };
 typedef struct LL *node; //making a pointer
-node top; // public node to save and call through out program
 
 node createNode(){
 	node temp;
@@ -34,7 +33,24 @@ node addNode(node head, int x){
 		}
 		p->next = temp;
 	}
-	top = head; //Makes the top node stored
+	return head;
+}
+
+int isEmpty(node head){
+	if(head == NULL)
+		return 1;
+	else
+		return 0;
+}
+
+node popNode(node head){
+	node temp;
+	if(head != NULL){
+		temp = head;
+		head = head->next;
+	}
+	else
+		head = NULL;
 	return head;
 }
 
