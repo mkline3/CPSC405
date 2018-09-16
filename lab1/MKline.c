@@ -18,7 +18,7 @@ node createNode(){
 	return temp;
 }
 
-void addNode(node head, int x){
+node addNode(node head, int x){
 	node temp;
 	node p;
 	temp = createNode();
@@ -36,7 +36,7 @@ void addNode(node head, int x){
 		head = temp;
 		head->next = p;
 	}
-	//return head;
+	return head;
 }
 
 int isEmpty(node head){
@@ -46,15 +46,16 @@ int isEmpty(node head){
 		return 0;
 }
 
-void popNode(node head){
-	node temp;
+node popNode(node head){
+	/*node temp;
 	if(head != NULL){
 		temp = head;
 		head = head->next;
 	}
 	else
-		head = NULL;
-	//return head;
+		head = NULL;*/
+	head = head->next;
+	return head;
 }
 
 int main(){
@@ -69,6 +70,7 @@ int main(){
 		if(x == 1){
 			printf("What number would you like to add to the list?\n");
 			scanf("%d",&y);
+<<<<<<< HEAD
 			addNode(&head, y);
 		}
 		else if(x == 2){
@@ -78,6 +80,19 @@ int main(){
 			int b;
 			b = isEmpty(&head);
 			printf("%d\n",b);
+=======
+			head = addNode(head, y);
+			printf("%d has been added\n", y);
+		}
+		else if(x == 2){
+			y = head->data;
+			printf("%d has been removed", y);
+			head = popNode(head);
+		}
+		else if(x == 3){
+			int b;
+			b = isEmpty(head);
+>>>>>>> cc9cd2272c15caa369d6353ea68a66b607390532
 			if(b == 1){
 				printf("The list is empty\n");
 			}
