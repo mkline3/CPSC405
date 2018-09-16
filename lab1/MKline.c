@@ -10,10 +10,10 @@ struct LL{
 	struct LL *next;
 };
 typedef struct LL *node; //making a pointer
-node *head = NULL;
+//node *head = NULL;
 node createNode(){
 	node temp;
-	temp = node(malloc(sizeof(struct LL));
+	temp = (malloc(sizeof(struct LL)));
 	temp->next = NULL;
 	return temp;
 }
@@ -57,33 +57,36 @@ void popNode(node head){
 	//return head;
 }
 
-int main(argc, char *argv[]){
+int main(){
 	int x = 0;
 	int y;
+	struct LL *head;
+	head = NULL;
 	printf("This program allows you to add, remove, and check to see if a linked list is empty.\n");
 	while(x != 4){
-		printf(" To add a number to the list press 1 \n To remove the top node from the list press 2 \n To check if the list is empty press 3 \n To exit this program press 4./n");
+		printf(" To add a number to the list press 1 \n To remove the top node from the list press 2 \n To check if the list is empty press 3 \n To exit this program press 4.\n");
  		scanf("%d",&x);
 		if(x == 1){
 			printf("What number would you like to add to the list?\n");
 			scanf("%d",&y);
-			//add shit
+			addNode(&head, y);
 		}
 		else if(x == 2){
-			//remove shit
+			popNode(&head);
 		}
 		else if(x == 3){
 			int b;
-			b = isEmpty();
+			b = isEmpty(&head);
+			printf("%d\n",b);
 			if(b == 1){
 				printf("The list is empty\n");
 			}
 			else{
-				printf("The list has at least 1 item");
+				printf("The list has at least 1 item\n");
 			}
 		}
 		else if(x == 4){
-			printf("Goodbye/n");
+			printf("Goodbye\n");
 		}
 		else{
 			printf("You failed to input a correct option.\n");
