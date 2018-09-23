@@ -1,0 +1,16 @@
+Matt Kline 
+Home Work 1 CPSC405
+9/22/18
+
+1. In the child process the varible is the same as it was in the main process. When both the parent and child process
+change the varibale the only change that is kept is the parent process.
+
+2. Both the parent and the child can access the file. When writing concurrently the Parents script will be written to 
+the file first.
+
+3. In order to make the child print first, instead of using wait() in the parent, you can use sleep(). By doing this you give the process a set time to sleep until it continues, allowing other processes to run in the mean time.
+
+4. The different forms of exec() provide different inputs for the same process, this can allow for you to put in an exec process without having to change the format of something you may have stored earlier in the process. The exec with a v in the call use vectors, where as the exec with the l uses comma to seperate the arguements.
+
+5. Wait blocks the process until the finish of the other process is returned. When wait is in the parent it makes sure
+ that the outcome from the child is done first, when wait is in the child the parent finishes it's process first. 
