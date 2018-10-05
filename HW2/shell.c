@@ -10,6 +10,7 @@ int main(){
 	char *args[32];
 	int i=0;
 	int pid;
+	char error_message[30] = "An error has occurred\n";
 	
 	while(strcmp(inputline, "exit") != 0){
 		printf("mysh> ");
@@ -34,9 +35,22 @@ int main(){
 		else{
 			if(pid == 0){
 			//	printf("\n In the child process about to run %s\n", *args);
-				execvp(*args, args);
+			
+			//	execvp(*args, args);
 				if(strcmp(inputline,"exit")==0)
 					printf("Goodbye\n");
+				else if(strcmp(inputline,"cd") == 0){
+					chdir(getenv("HOME"));
+				}
+				//else if(strcmp(inputline, "pwd")==0){
+				
+				//}
+				else if(execvp(*args, args) < 0){
+					write(STDERR_FILENO, error_message, strlen(error_message));
+				}
+				else{
+					execvp(*args, args);
+				}
 				return(0);
 			}
 			else{
