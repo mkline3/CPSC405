@@ -20,18 +20,23 @@ int main(int argc,char* argv[] ){
 		}
 		else{
 			while(strcmp(inputline, "exit") != 0){
+
 				printf("mysh> ");
 				fgets(inputline, sizeof(inputline), file);
 				printf("%s", inputline);
 				inputline[sizeof(inputline)-1] ='\0';
+				char *input;
+        //                        int i;
 
 				int j=0;
 				while(inputline[j] !='\n'){
 					j++;
 				}
 				inputline[j] = '\0';
-				*args = inputline;
-
+				//*args = inputline;
+				
+                                input = strtok(inputline, " ");
+				*args = input;
 				args[1] = NULL;
 
 				pid = fork();
@@ -44,7 +49,7 @@ int main(int argc,char* argv[] ){
 						//	printf("\n In the child process about to run %s\n", *args);
 
 						//	execvp(*args, args);
-						if(strcmp(inputline,"exit")==0){
+						if(strcmp(input,"exit")==0){
 							printf("Goodbye\n");
 							exit(0);
 						}
@@ -54,7 +59,7 @@ int main(int argc,char* argv[] ){
 							getcwd(cwd,sizeof(cwd));
 							printf("%s\n", cwd);
 						}
-						else if(strcmp(inputline, "pwd")==0){
+						else if(strcmp(input, "pwd")==0){
 							getcwd(cwd, sizeof(cwd));
 							printf( "%s\n",cwd);
 						}
@@ -127,10 +132,12 @@ int main(int argc,char* argv[] ){
 				j++;
 			}
 			inputline[j] = '\0';
-			*args = inputline;
-
+		//	*args = inputline;
+			char *input;
+			
+                        input = strtok(inputline, " ");
 			args[1] = NULL;
-
+			*args =input;
 			pid = fork();
 			if(pid < 0){
 				printf("\nThe fork Failed\n");
@@ -141,17 +148,16 @@ int main(int argc,char* argv[] ){
 					//	printf("\n In the child process about to run %s\n", *args);
 
 					//	execvp(*args, args);
-					if(strcmp(inputline,"exit")==0){
+					if(strcmp(input,"exit")==0){
 						printf("Goodbye\n");
 						exit(0);
 					}
-
 					else if(strcmp(inputline,"cd") == 0){
 						chdir(getenv("HOME"));
 						getcwd(cwd,sizeof(cwd));
 						printf("%s\n", cwd);
 					}
-					else if(strcmp(inputline, "pwd")==0){
+					else if(strcmp(input, "pwd")==0){
 						getcwd(cwd, sizeof(cwd));
 						printf( "%s\n",cwd);
 					}
@@ -159,15 +165,31 @@ int main(int argc,char* argv[] ){
 						char *t;
 						int i;
 						t = strtok(inputline, " ");
-						for (i=0; t != NULL; i++) {
-							if(i == 1){
-								if(chdir(t) == 0){
-									getcwd(cwd,sizeof(cwd));
-									printf("%s\n",cwd);
+						for (i=0; i < 2; i++) {
+							//printf("%d\n",i);
+							if((i ==1) && (t != NULL)){
+								printf("%d\n", i);
+								if(i == 1){
+									
+									if(chdir(t) == 0){
+										getcwd(cwd,sizeof(cwd));
+										printf("%s\n",cwd);
+									}
+									else{
+										write(STDERR_FILENO, error_message, strlen(error_message));
+									}
 								}
-								else{
-									write(STDERR_FILENO, error_message, strlen(error_message));
-								}
+								
+							//printf("%s\n", t);	
+						//	if(t == NULL){
+
+						//	}
+							}
+							else{
+
+								chdir(getenv("HOME"));
+								getcwd(cwd,sizeof(cwd));
+								printf("%s\n", cwd);
 							}
 							t = strtok(NULL, " ");
 						}
@@ -192,13 +214,22 @@ int main(int argc,char* argv[] ){
 						char *t;
 						int i;
 						t = strtok(inputline, " ");
-						for (i=0; t != NULL; i++) {
-							if(i == 1){
-								if(chdir(t) == 0){
-									getcwd(cwd,sizeof(cwd));
-								}
-								else{
-								//	write(STDERR_FILENO, error_message, strlen(error_message));	
+						for (i=0; t !=NULL; i++) {
+							if(i == 1 && t == NULL){
+                                                               // if(t == NULL){
+                                                                        chdir(getenv("HOME"));
+                                                                        getcwd(cwd,sizeof(cwd));
+                                                                       // printf("%s\n", cwd);
+                                                               // }
+							}
+							else{
+								if(i ==1){
+									if(chdir(t) == 0){
+										getcwd(cwd,sizeof(cwd));
+									}
+									else{
+										//	write(STDERR_FILENO, error_message, strlen(error_message));	
+									}
 								}
 							}
 							t = strtok(NULL, " ");

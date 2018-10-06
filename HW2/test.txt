@@ -1,7 +1,7 @@
-ls
+     ls
 cd
 ls
 cd CPSC405
 ls
-pwd
+    pwd
 exit
