@@ -602,15 +602,17 @@ int getpininfo(){
 }
 
 int uppriority(){
-  struct proc *p;
-  sti();
+  //struct proc *p;
+  //sti();
    acquire(&ptable.lock);
-    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->que == 2){
-        cprintf("Process %d is now in the High priority\n", p->pid);
-        p->que = 1;
+   // for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      cprintf("Process to change: %d\n", myproc()->pid);
+
+      if(myproc()->que == 2){
+        cprintf("Process %d is now in the High priority\n", myproc()->pid);
+        myproc()->que = 1;
       }
-    }
+   // }
       
     
     release(&ptable.lock);
