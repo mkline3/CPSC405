@@ -8,9 +8,9 @@ int main(int argc, char *argv[]){
 		printf(0,"Fork failed\n");
 	if(pid == 0){
 		printf(0,"Child process \n");
-		for(int i = 0; i < 50; i++);
-		getpininfo();
-		getpininfo();
+		for(int i = 0; i < 5; i++){
+			getpininfo();
+		}
 		exit();
 	}
 	if(pid> 0){
