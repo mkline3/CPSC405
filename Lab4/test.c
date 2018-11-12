@@ -10,10 +10,8 @@ int main(int argc, char *argv[]){
 		printf(0,"Child process \n");
 		for(int i = 0; i < 5; i++){
 			getpininfo();
-			if(i == 4){
-				uppriority();
-				getpininfo();
-			}
+			uppriority();
+			getpininfo();
 		}
 		exit();
 	}

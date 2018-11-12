@@ -1,0 +1,9 @@
+     ls
+ls > out.txt
+hello.py
+	cd
+   ls
+cd    CPSC405
+ls
+    pwd
+exit
