@@ -1,0 +1,26 @@
+Part1
+
+1. Threads are better than processes for this function because threads have faster context switches as well as threads share the data in a simpler way.
+
+2. workperformed is significat because it tells the program if something has been done in one of the threads allowing the program to then move to the next thread for order.
+
+3. This allows the pointer to go to a function and handle any type of arguemnt. fp = function.
+
+
+Part2
+
+1. By detaching a thread the function would terminate after it ran. If you detatch the sleeper enzyme it stops the program from completing.
+
+2. Sched yield gives other threads the chance to run when the resources are being heavily used. The count may not always be identical since threads could be picking it up at different times.
+
+3.Thread is in a deadlock waiting forever.
+
+4.The sleeper thread allows the program to run for a certain amount of time. If the program doesn't complete by then it ends the program allowing the program to be able to stop if the threads are stuck.
+
+5.PTHREAD_CANCEL_ASYNCHRONOUS is used so that the threads can be canceled at any time to free up space.
+
+
+
+
+
+https://github.com/loomisdf/CSE-381-HW4/blob/master/enzyme.c
